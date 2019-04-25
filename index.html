@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Planets by Data Tables</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <table id="d-tables" border="1" class="w-100">
+            <tr>
+                <th>Name</th>
+                <th>Rotation Period</th>
+                <th>Orbital Period</th>
+                <th>Diameter</th>
+                <th>Climate</th>
+                <th>Gravity</th>
+                <th>Terrain</th>
+                <th>Surface Water</th>
+                <th>Population</th>
+                <th>Residents</th>
+                <th>Films</th>
+            </tr>
+        </table>
+    </div>
+
+    <script src="planets.js"></script>
+    <script>
+        console.log(planets[0].films[1]);
+        let tbl=document.getElementById("d-tables");
+        let data="";
+        let residents="";
+        let films="";
+        // planets.map(planet=>{
+        //     let data+=
+        //     for(x in planet.residents){
+        //         residents+="<ul><li>"+planet.residents[x]+"</li></ul>";
+        //     }
+        // })
+        // planets.map(planet=>{
+
+        //     data+=`<tr><td>${planet.name}</td><td>${planet.rotation_period}</td><td>${planet.orbital_period}</td><td>${planet.diameter}</td><td>${planet.climate}</td><td>${planet.gravity}</td><td>${planet.terrain}</td><td>${planet.surface_water}</td><td>${planet.population}</td><td><ul>${planet.residents}</ul></td><td>${planet.films}</td></tr>`
+        // });
+
+        tbl.insertAdjacentHTML("beforeend",data);
+    </script>
+</body>
+
+</html>
