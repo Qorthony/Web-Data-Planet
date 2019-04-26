@@ -12,8 +12,11 @@
 
 <body>
     <div class="pt-3 pb-3">
-        <form>
-            <p>Search : <input type="text"/> from : <select name="" id="s-title"></select> </p>
+        <form class="form-inline">
+            <label for="cari">Search :</label>
+            <input class="form-control" name="cari" id="cari" type="text" onchange="handleCari(value)" />
+            <label for="s-option">from :</label>
+            <select class="custom-select" name="s-option" id="s-option"></select>
             <table id="d-tables" class="table table-striped w-100">
                 <tr>
                     <th>Name</th>
@@ -34,15 +37,27 @@
 
     <script src="planets.js"></script>
     <script>
-        console.log(planets[0].films[1]);
         let tbl = document.getElementById("d-tables");
+        let cari = document.getElementById("cari");
+        let select = document.getElementById("s-option");
+        let opsi = "";
         let data = "";
-        planets.map(planet => {
+        for (x in planets[0]) {
+            if (x == "created") {
+                break;
+            }
+            opsi += "<option value='" + x + "'>" + x + "</option>";
+        }
+        select.insertAdjacentHTML("beforeend", opsi);
 
+        planets.map(planet => {
             data += "<tr><td>" + planet.name + "</td><td>" + planet.rotation_period + "</td><td>" + planet.orbital_period + "</td><td>" + planet.diameter + "</td><td>" + planet.climate + "</td><td>" + planet.gravity + "</td><td>" + planet.terrain + "</td><td>" + planet.surface_water + "</td><td>" + planet.population + "</td><td><ul>" + planet.residents.map(e => "<li>" + e + "</li>") + "</ul></td><td><ul>" + planet.films.map(e => "<li>" + e + "</li>") + "</ul></td></tr>"
         });
-
         tbl.insertAdjacentHTML("beforeend", data);
+
+        function handleCari(n) {
+            console.log(cari.value);
+        }
     </script>
 </body>
 
