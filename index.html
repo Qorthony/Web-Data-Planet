@@ -12,13 +12,13 @@
 
 <body>
     <div class="pt-3 pb-3">
-        <form class="form-inline">
-            <label for="cari">Search :</label>
-            <input class="form-control" name="cari" id="cari" type="text" />
-            <label for="s-option">from :</label>
-            <select class="custom-select" name="s-option" id="s-option"></select>
-            <input class="form-control" type="button" value="Go!" onclick="handleCari()">
-            <input class="form-control" type="button" value="Reset" onclick="resetData()">
+        <form class="form-inline mt-1 mb-1">
+                <label for="cari">Search :</label>
+                <input class="form-control" name="cari" id="cari" type="text" />
+                <label for="s-option">from :</label>
+                <select class="custom-select" name="s-option" id="s-option"></select>
+                <input class="form-control" type="button" value="Go!" onclick="showData()">
+                <input class="form-control" type="button" value="Reset" onclick="resetData()"> 
         </form>
         <table class="table table-striped w-100">
             <thead>
@@ -37,9 +37,6 @@
                 </tr>
             </thead>
             <tbody id="d-tables">
-                <tr id="p1">
-                    <td>aa</td>
-                </tr>
 
             </tbody>
 
@@ -54,51 +51,43 @@
         let select = document.getElementById("s-option");
         let opsi = "";
         let data = "";
-        for (x in planets[0]) {
+        
+        window.addEventListener("load", function () {
+            
+            for (x in planets[0]) {
             if (x == "created") {
                 break;
             }
             opsi += "<option value='" + x + "'>" + x + "</option>";
         }
-        window.addEventListener("load",function () {
-            showData();
+        select.insertAdjacentHTML("beforeend", opsi);
+        showData();
         });
-        cari.addEventListener("keypress",function (e) {
-            
-            if(e.keyCode==13){
+
+        cari.addEventListener("keypress", function (e) {
+
+            if (e.keyCode == 13) {
                 e.preventDefault();
-                handleCari();
+                showData();
             }
         })
-        select.insertAdjacentHTML("beforeend", opsi);
+        
 
         function resetData() {
             tbl.innerHTML = "";
-            data="";
+            data = "";
         }
 
         function showData() {
             resetData();
             planets.map(planet => {
-                data += "<tr><td>" + planet.name + "</td><td>" + planet.rotation_period + "</td><td>" + planet.orbital_period + "</td><td>" + planet.diameter + "</td><td>" + planet.climate + "</td><td>" + planet.gravity + "</td><td>" + planet.terrain + "</td><td>" + planet.surface_water + "</td><td>" + planet.population + "</td><td><ul>" + planet.residents.map(e => "<li>" + e + "</li>") + "</ul></td><td><ul>" + planet.films.map(e => "<li>" + e + "</li>") + "</ul></td></tr>"
-            });
-            tbl.insertAdjacentHTML("beforeend", data);
-        }
-
-        function handleCari() {
-            resetData();
-            planets.map(planet => {
                 if (planet[select.value].includes(cari.value) === true) {
                     data += "<tr><td>" + planet.name + "</td><td>" + planet.rotation_period + "</td><td>" + planet.orbital_period + "</td><td>" + planet.diameter + "</td><td>" + planet.climate + "</td><td>" + planet.gravity + "</td><td>" + planet.terrain + "</td><td>" + planet.surface_water + "</td><td>" + planet.population + "</td><td><ul>" + planet.residents.map(e => "<li>" + e + "</li>") + "</ul></td><td><ul>" + planet.films.map(e => "<li>" + e + "</li>") + "</ul></td></tr>";
                 }
-                
+
             });
             tbl.insertAdjacentHTML("beforeend", data);
         }
-        
-
-
-
     </script>
 </body>
 
